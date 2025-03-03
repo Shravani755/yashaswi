@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yashaswi's C# Grades</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f7f9;
+            color: #333;
+        }
+
+        h1 {
+            margin-top: 40px;
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 90%;
+            max-width: 800px;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        #average-display {
+            font-weight: bold;
+            color: #28a745;
+            font-size: 1.2em;
+        }
+
+        tfoot td {
+            background-color: #e9ecef;
+        }
+
+        tfoot td:first-child{
+            font-weight: bold;
+        }
+
+        .centered {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Yashaswi's C# Grades</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Week</th>
+                <th>Score</th>
+                <th>Grade</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody id="grades-table-body">
+            </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="centered">Average:</td>
+            <td id="average-display" class="centered"></td>
+          </tr>
+        </tfoot>
+    </table>
+
+    <script>
+        const grades = [
+            { week: 1, score: 0, grade: 'F', remarks: 'Needs immediate attention' },
+        ];
+
+        function populateTable() {
+            const tableBody = document.getElementById('grades-table-body');
+            tableBody.innerHTML = '';
+
+            grades.forEach(grade => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${grade.week}</td>
+                    <td>${grade.score}</td>
+                    <td>${grade.grade}</td>
+                    <td>${grade.remarks}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+            calculateAverage();
+        }
+
+        function calculateAverage() {
+          let totalScore = 0;
+          grades.forEach(grade => {
+            totalScore += grade.score;
+          });
+          const average = grades.length > 0 ? (totalScore / grades.length).toFixed(2) : 0;
+          document.getElementById('average-display').textContent = average;
+        }
+
+        populateTable();
+
+        function updateGrades(newGrades) {
+          grades.length = 0;
+          newGrades.forEach(newGrade => {
+            grades.push(newGrade);
+          });
+          populateTable();
+        }
+    </script>
+</body>
+</html>
