@@ -3,46 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yashaswi's C# Grades</title>
+    <title>Yashaswi's C# Progress</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            background-color: #f4f7f9;
+            background: linear-gradient(135deg, #f0f4f8, #e8eaf6);
             color: #333;
+            transition: background 0.3s ease;
         }
 
         h1 {
-            margin-top: 40px;
-            color: #007bff;
+            margin-top: 50px;
+            color: #3f51b5;
             text-align: center;
+            margin-bottom: 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 2.2em;
+        }
+
+        section {
+            width: 90%;
+            max-width: 800px;
+            margin-bottom: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        h2 {
+            color: #3f51b5;
             margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            font-weight: 400;
+            font-size: 1.8em;
         }
 
         table {
-            width: 90%;
-            max-width: 800px;
+            width: 100%;
             border-collapse: collapse;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: white;
-            border-radius: 8px;
+            margin-bottom: 20px;
+            border-radius: 4px;
             overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
         }
 
         th, td {
             padding: 15px;
             text-align: center;
             border-bottom: 1px solid #e0e0e0;
+            font-size: 1em;
         }
 
         th {
-            background-color: #007bff;
+            background-color: #3f51b5;
             color: white;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9em;
         }
 
         tr:nth-child(even) {
@@ -50,45 +84,82 @@
         }
 
         #average-display {
-            font-weight: bold;
-            color: #28a745;
+            font-weight: 500;
+            color: #4caf50;
             font-size: 1.2em;
         }
 
         tfoot td {
-            background-color: #e9ecef;
-        }
-
-        tfoot td:first-child{
-            font-weight: bold;
+            background-color: #f0f0f0;
+            font-weight: 500;
         }
 
         .centered {
             text-align: center;
         }
+
+        .assignment-link, .submit-assignment-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .assignment-link:hover, .submit-assignment-link:hover {
+            background-color: #43a047;
+            transform: scale(1.03);
+        }
+
+        .assignment-link i, .submit-assignment-link i {
+            margin-right: 8px;
+        }
+
+        .due-date {
+            font-style: italic;
+            color: #d32f2f;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
-    <h1>Yashaswi's C# Grades</h1>
+    <h1>Yashaswi's C# Progress</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Week</th>
-                <th>Score</th>
-                <th>Grade</th>
-                <th>Remarks</th>
-            </tr>
-        </thead>
-        <tbody id="grades-table-body">
-            </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="3" class="centered">Average:</td>
-            <td id="average-display" class="centered"></td>
-          </tr>
-        </tfoot>
-    </table>
+    <section>
+        <h2>Grades</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Week</th>
+                    <th>Score</th>
+                    <th>Grade</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody id="grades-table-body"></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="centered">Average:</td>
+                    <td id="average-display" class="centered"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </section>
+
+    <section>
+        <h2>Assignments</h2>
+        <p><strong>Week 2 Assignment:</strong></p>
+        <a href="https://docs.google.com/document/d/1vJJQVJVfonWURrIwXCmLd-DxfopQ8NPB7nSwDVdoPHM/edit?tab=t.0" class="assignment-link" target="_blank"><i class="fas fa-file-alt"></i>View Assignment</a>
+        <a href="https://docs.google.com/forms/d/1Lffg-7mwBLi9vChlTXdm5XZPxdmQ8AAfuigYoZ2O7JM/edit" class="submit-assignment-link" target="_blank"><i class="fas fa-upload"></i>Submit Assignment</a>
+        <p class="due-date">Due: Sunday, March 9th, 2025, 11:59 PM</p>
+    </section>
 
     <script>
         const grades = [
@@ -113,22 +184,22 @@
         }
 
         function calculateAverage() {
-          let totalScore = 0;
-          grades.forEach(grade => {
-            totalScore += grade.score;
-          });
-          const average = grades.length > 0 ? (totalScore / grades.length).toFixed(2) : 0;
-          document.getElementById('average-display').textContent = average;
+            let totalScore = 0;
+            grades.forEach(grade => {
+                totalScore += grade.score;
+            });
+            const average = grades.length > 0 ? (totalScore / grades.length).toFixed(2) : 0;
+            document.getElementById('average-display').textContent = average;
         }
 
         populateTable();
 
         function updateGrades(newGrades) {
-          grades.length = 0;
-          newGrades.forEach(newGrade => {
-            grades.push(newGrade);
-          });
-          populateTable();
+            grades.length = 0;
+            newGrades.forEach(newGrade => {
+                grades.push(newGrade);
+            });
+            populateTable();
         }
     </script>
 </body>
